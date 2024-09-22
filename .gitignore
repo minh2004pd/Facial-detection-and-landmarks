@@ -1,0 +1,10 @@
+# ignore ALL .log files
+*.log
+
+data/
+lightning_logs/
+outputs/
+results_*/
+
+.conda/
+env/

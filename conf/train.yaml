@@ -1,0 +1,23 @@
+trainer:
+  _target_: lightning.Trainer
+  limit_train_batches: 1.0
+  limit_test_batches: 1.0
+  limit_val_batches: 1.0
+  max_epochs: 200
+  precision: 16
+  # accumulate_grad_batches: 8
+  gradient_clip_val: 0.5
+  gradient_clip_algorithm: "value"
+  callbacks:
+    - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+      dirpath: "./results_resnet501/checkpoints"  # Adjust path based on your args
+      filename: "{epoch}-{mae:.2f}"
+      monitor: "mae"
+      mode: "min"
+      save_last: true
+  # strategy: "ddp_spawn"
+  # callbacks:
+  #   - _target_: lightning.pytorch.callbacks.StochasticWeightAveraging
+  #     swa_epoch_start: 1
+  #     swa_lrs: 1e-2
+  # profiler: "simple"
